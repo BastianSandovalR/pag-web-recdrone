@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecDrone - Vista Aérea Premium de Terrenos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #159895;
+            --accent-color: #57c5b6;
+            --dark-color: #002333;
+            --light-color: #f8f9fa;
+            --gold-color: #d4af37;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 35, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 5%;
+            background: rgba(0, 35, 51, 0.98);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--gold-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,200 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(87,197,182,0.1)"/></svg>');
+            background-size: cover;
+            animation: wave 15s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            color: var(--accent-color);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gold-color);
+            color: var(--dark-color);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--dark-color);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gold-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 4rem;
+            font-size: 1.2rem;
+        }
+
+        /* Tour 360 Section */
+        .tour-360-container {
+            background: var(--light-color);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            margin-bottom: 4rem;
+        }
+
+        .tour-360-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .tour-360-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .tour-360-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+
+        .tour-360-placeholder i {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            color: white;
+            z-index: 2;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .gallery-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Specifications */
+        .specs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            background: var(--light-color);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 3rem;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .spec-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .spec-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+        }
+
+        .spec-content h4 {
+            color: var(--dark-color);
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .spec-content p {
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Map Section */
+        .map-container {
+            margin-top: 3rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            height: 500px;
+            background: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-placeholder {
+            text-align: center;
+            color: #666;
+        }
+
+        .map-placeholder i {
+            font-size: 5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 4rem 5%;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--gold-color);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-form h3 {
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gold-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 3rem 5%;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--gold-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator i {
+            font-size: 2rem;
+            color: var(--gold-color);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-drone"></i>
+                RecDrone
+            </a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#tour360">Tour 360°</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#especificaciones">Detalles</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>El Tranque</h1>
+            <p class="hero-subtitle">Experiencia Inmersiva en Vista Aérea Premium</p>
+            <p style="font-size: 1.1rem; margin-bottom: 2.5rem; font-weight: 300;">
+                Descubre este exclusivo terreno a través de nuestra tecnología de drones profesionales y tours 360° interactivos
+            </p>
+            <div class="cta-buttons">
+                <a href="#tour360" class="btn btn-primary">
+                    <i class="fas fa-vr-cardboard"></i> Ver Tour 360°
+                </a>
+                <a href="#contacto" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i> Solicitar Información
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section>
+        <h2 class="section-title">Por Qué Elegirnos</h2>
+        <p class="section-subtitle">Tecnología de vanguardia para mostrar cada detalle de tu inversión</p>
+
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-drone"></i>
+                </div>
+                <h3>Fotografía con Drones</h3>
+                <p>Capturamos imágenes aéreas de alta resolución que revelan cada aspecto del terreno desde perspectivas únicas e imposibles.</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-street-view"></i>
+                </div>
+                <h3>Tours 360° Interactivos</h3>
+                <p>Explora el terreno de manera inmersiva desde cualquier lugar del mundo con nuestra tecnología de realidad virtual.</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Videos Cinematográficos</h3>
+                <p>Producción de videos profesionales que muestran la belleza y el potencial del terreno de manera cinematográfica.</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Mapeo Topográfico</h3>
+                <p>Análisis detallado del terreno con mediciones precisas y mapas topográficos generados con tecnología GPS avanzada.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tour 360 Section -->
+    <section id="tour360">
+        <h2 class="section-title">Recorrido Virtual 360°</h2>
+        <p class="section-subtitle">Explora cada rincón del terreno de manera interactiva</p>
+
+        <div class="tour-360-container fade-in">
+            <div class="tour-360-wrapper">
+                <!-- Reemplaza el src con tu URL de tour 360 (ej: Matterport, Kuula, o tu propio sistema) -->
+                <iframe src="https://recdrone.cl/360/ElTranque/" allowfullscreen></iframe>
+                <!-- Si no tienes iframe aún, descomentar el placeholder:
+                <div class="tour-360-placeholder">
+                    <i class="fas fa-360-degrees"></i>
+                    <h3>Tour 360° Disponible Próximamente</h3>
+                    <p>Experimenta el terreno en realidad virtual</p>
+                </div>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria">
+        <h2 class="section-title">Galería Aérea</h2>
+        <p class="section-subtitle">Imágenes capturadas con tecnología drone profesional</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">
+                    <i class="fas fa-image"></i>
+                    <h3>Vista Panorámica</h3>
+                </div>
+                <div class="gallery-overlay">
+                    <h3>Vista General del Terreno</h3>
+                    <p>Perspectiva aérea completa</p>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">
+                    <i class="fas fa-image"></i>
+                    <h3>Vista Frontal</h3>
+                </div>
+                <div class="gallery-overlay">
+                    <h3>Acceso Principal</h3>
+                    <p>Entrada y caminos de acceso</p>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">
+                    <i class="fas fa-image"></i>
+                    <h3>Vista Lateral</h3>
+                </div>
+                <div class="gallery-overlay">
+                    <h3>Linderos y Límites</h3>
+                    <p>Delimitación del terreno</p>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">
+                    <i class="fas fa-image"></i>
+                    <h3>Atardecer</h3>
+                </div>
+                <div class="gallery-overlay">
+                    <h3>Vista al Atardecer</h3>
+                    <p>Iluminación natural</p>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">
+                    <i class="fas fa-image"></i>
+                    <h3>Entorno</h3>
+                </div>
+                <div class="gallery-overlay">
+                    <h3>Zona Circundante</h3>
+                    <p>Contexto y ubicación</p>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">
+                    <i class="fas fa-image"></i>
+                    <h3>Vista Detalle</h3>
+                </div>
+                <div class="gallery-overlay">
+                    <h3>Características Especiales</h3>
+                    <p>Detalles destacados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications Section -->
+    <section id="especificaciones">
+        <h2 class="section-title">Especificaciones del Terreno</h2>
+        <p class="section-subtitle">Información detallada y características principales</p>
+
+        <div class="specs-container fade-in">
+            <div class="spec-item">
+                <div class="spec-icon">
+                    <i class="fas fa-ruler-combined"></i>
+                </div>
+                <div class="spec-content">
+                    <h4>Superficie Total</h4>
+                    <p>5,000 m²</p>
+                </div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-icon">
+                    <i class="fas fa-tape"></i>
+                </div>
+                <div class="spec-content">
+                    <h4>Frente</h4>
+                    <p>50 metros</p>
+                </div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-icon">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <div class="spec-content">
+                    <h4>Topografía</h4>
+                    <p>Semi-plana</p>
+                </div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-icon">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <div class="spec-content">
+                    <h4>Documentación</h4>
+                    <p>Al día</p>
+                </div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-icon">
+                    <i class="fas fa-water"></i>
+                </div>
+                <div class="spec-content">
+                    <h4>Agua</h4>
+                    <p>Factibilidad</p>
+                </div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="spec-content">
+                    <h4>Electricidad</h4>
+                    <p>Factibilidad</p>
+                </div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-icon">
+                    <i class="fas fa-road"></i>
+                </div>
+                <div class="spec-content">
+                    <h4>Acceso</h4>
+                    <p>Camino pavimentado</p>
+                </div>
+            </div>
+
+            <div class="spec-item">
+                <div class="spec-icon">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <div class="spec-content">
+                    <h4>Vegetación</h4>
+                    <p>Natural</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="ubicacion">
+        <h2 class="section-title">Ubicación Estratégica</h2>
+        <p class="section-subtitle">Encuentra el terreno en el mapa</p>
+
+        <div class="map-container fade-in">
+            <!-- Reemplaza con tu código de Google Maps, OpenStreetMap, etc. -->
+            <!-- Ejemplo con Google Maps iframe:
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+            -->
+            <div class="map-placeholder">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>El Tranque, Chile</h3>
+                <p>Ubicación exacta disponible al contactar</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div class="contact-section fade-in" id="contacto">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>¿Interesado en Este Terreno?</h2>
+                <p>
+                    Nuestro equipo está listo para proporcionarte toda la información que necesitas. 
+                    Agenda una visita guiada o solicita más detalles sobre este exclusivo terreno.
+                </p>
+
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+56 9 XXXX XXXX</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contacto@recdrone.cl</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Chile</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Lun - Vie: 9:00 - 18:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <h3>Envíanos un Mensaje</h3>
+
+                <div class="form-group">
+                    <label for="name">Nombre Completo *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Mensaje *</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p style="font-size: 0.9rem; color: #999;">
+                &copy; 2025 RecDrone. Todos los derechos reservados.
+            </p>
+            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">
+                Fotografía y videos aéreos profesionales para propiedades inmobiliarias
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Aquí puedes agregar tu lógica para enviar el formulario
+            // Por ejemplo, usando EmailJS, FormSubmit, o tu propio backend
+
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+            e.target.reset();
+        });
+
+        // Gallery item click (puedes expandir para lightbox)
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Aquí puedes agregar funcionalidad de lightbox/modal
+                console.log('Gallery item clicked');
+            });
+        });
+    </script>
+</body>
+</html>
