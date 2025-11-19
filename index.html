@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RecDrone - Vista Aérea Premium de Terrenos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>El Tranque - Terreno Premium en Venta</title>
+    <meta name="description" content="Terreno exclusivo en El Tranque. Explora con tour virtual 360° capturado con drone profesional. Documentación al día, excelente ubicación.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,434 +15,349 @@
         }
 
         :root {
-            --primary-color: #1a5f7a;
-            --secondary-color: #159895;
-            --accent-color: #57c5b6;
-            --dark-color: #002333;
-            --light-color: #f8f9fa;
-            --gold-color: #d4af37;
+            --primary: #2c3e50;
+            --secondary: #27ae60;
+            --accent: #3498db;
+            --gold: #f39c12;
+            --dark: #1a1a1a;
+            --light: #ecf0f1;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: #333;
-            overflow-x: hidden;
+            background: #fff;
         }
 
-        /* Navbar */
-        .navbar {
+        /* Header sticky */
+        .header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 35, 51, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
-            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
         }
 
-        .navbar.scrolled {
-            padding: 0.5rem 5%;
-            background: rgba(0, 35, 51, 0.98);
-        }
-
-        .nav-container {
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
         }
 
-        .logo {
+        .project-title {
+            font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .header-price {
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--accent-color);
-            text-decoration: none;
+            color: var(--gold);
+        }
+
+        .cta-header {
             display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .logo i {
-            color: var(--gold-color);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,200 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(87,197,182,0.1)"/></svg>');
-            background-size: cover;
-            animation: wave 15s ease-in-out infinite;
-        }
-
-        @keyframes wave {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero-content {
-            z-index: 1;
-            max-width: 900px;
-            padding: 2rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            color: var(--accent-color);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
         .btn-primary {
-            background: var(--gold-color);
-            color: var(--dark-color);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            background: var(--secondary);
+            color: white;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.3);
         }
 
         .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
 
         .btn-secondary:hover {
-            background: white;
-            color: var(--dark-color);
+            background: var(--primary);
+            color: white;
         }
 
-        /* Section Styles */
-        section {
-            padding: 5rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--dark-color);
+        /* Hero con tour 360 */
+        .hero {
+            margin-top: 80px;
+            height: 80vh;
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            background: var(--dark);
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--gold-color);
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 4rem;
-            font-size: 1.2rem;
-        }
-
-        /* Tour 360 Section */
-        .tour-360-container {
-            background: var(--light-color);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            margin-bottom: 4rem;
-        }
-
-        .tour-360-wrapper {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            background: #000;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .tour-360-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .tour-360-frame {
             width: 100%;
             height: 100%;
             border: none;
         }
 
-        .tour-360-placeholder {
+        .hero-overlay {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             color: white;
+            padding: 3rem 2rem;
         }
 
-        .tour-360-placeholder i {
-            font-size: 5rem;
+        .hero-overlay-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
             margin-bottom: 1rem;
-            color: var(--accent-color);
         }
 
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid #e0e0e0;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-            border-color: var(--accent-color);
-        }
-
-        .feature-icon {
+        .hero-overlay h1 {
+            font-family: 'Playfair Display', serif;
             font-size: 3rem;
-            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-location {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Quick specs bar */
+        .quick-specs {
+            background: white;
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .quick-specs-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .spec-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .spec-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .spec-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Description */
+        .description-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .description-text p {
             margin-bottom: 1.5rem;
         }
 
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark-color);
+        .highlights-box {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--secondary);
         }
 
-        .feature-card p {
-            color: #666;
-            line-height: 1.8;
+        .highlights-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .highlight-item i {
+            color: var(--secondary);
+            font-size: 1.2rem;
         }
 
         /* Gallery */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
         }
 
         .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            cursor: pointer;
             height: 300px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            background: var(--light);
         }
 
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-            z-index: 1;
-        }
-
-        .gallery-item:hover::before {
-            background: rgba(0, 0, 0, 0.6);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            color: white;
-            z-index: 2;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
+        .gallery-item:first-child {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+            height: auto;
         }
 
         .gallery-placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 2;
-        }
-
-        .gallery-placeholder i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Specifications */
-        .specs-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            background: var(--light-color);
-            padding: 3rem;
-            border-radius: 20px;
-            margin-top: 3rem;
-        }
-
-        .spec-item {
+            width: 100%;
+            height: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 10px;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
             transition: all 0.3s ease;
         }
 
-        .spec-item:hover {
+        .gallery-item:hover .gallery-placeholder {
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .spec-icon {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
+        .gallery-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
         }
 
-        .spec-content h4 {
-            color: var(--dark-color);
-            margin-bottom: 0.3rem;
-            font-size: 1.1rem;
+        /* Specifications */
+        .specs-detailed {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
         }
 
-        .spec-content p {
-            color: #666;
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+
+        .spec-name {
             font-weight: 600;
+            color: #666;
         }
 
-        /* Map Section */
-        .map-container {
-            margin-top: 3rem;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        .spec-value-detail {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Map */
+        .map-section {
+            background: var(--light);
+        }
+
+        .map-wrapper {
             height: 500px;
-            background: var(--light-color);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .map-placeholder {
@@ -450,651 +366,510 @@
         }
 
         .map-placeholder i {
-            font-size: 5rem;
-            color: var(--secondary-color);
+            font-size: 4rem;
+            color: var(--accent);
             margin-bottom: 1rem;
         }
 
-        /* Contact Section */
-        .contact-section {
-            background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%);
+        /* Contact CTA */
+        .contact-cta {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
-            border-radius: 20px;
-            padding: 4rem;
-            margin: 4rem 5%;
+            text-align: center;
+            padding: 5rem 2rem;
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .contact-info h2 {
+        .contact-cta h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
-        .contact-info p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            line-height: 1.8;
+        .contact-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
         }
 
-        .contact-details {
+        .contact-methods {
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-item i {
-            font-size: 1.5rem;
-            color: var(--gold-color);
-        }
-
-        .contact-form {
+        .contact-card {
             background: white;
-            padding: 2.5rem;
+            color: var(--dark);
+            padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
-
-        .contact-form h3 {
-            color: var(--dark-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--dark-color);
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-family: 'Montserrat', sans-serif;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--gold-color);
-            color: var(--dark-color);
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
+            min-width: 250px;
             transition: all 0.3s ease;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .contact-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
         }
 
         /* Footer */
         footer {
-            background: var(--dark-color);
+            background: var(--dark);
             color: white;
             text-align: center;
-            padding: 3rem 5%;
+            padding: 2rem;
         }
 
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
+        .footer-note {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 1rem;
         }
 
-        .social-links {
+        /* WhatsApp float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: #25D366;
+            border-radius: 50%;
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.8rem;
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5);
+            z-index: 999;
             transition: all 0.3s ease;
+            animation: pulse-whatsapp 2s infinite;
         }
 
-        .social-links a:hover {
-            color: var(--gold-color);
-            transform: translateY(-5px);
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float i {
+            color: white;
+            font-size: 2.2rem;
+        }
+
+        @keyframes pulse-whatsapp {
+            0%, 100% { box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5); }
+            50% { box-shadow: 0 5px 35px rgba(37, 211, 102, 0.8); }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .cta-header {
+                flex-direction: column;
+                width: 100%;
             }
 
-            .hero-subtitle {
-                font-size: 1.2rem;
+            .btn {
+                width: 100%;
+                justify-content: center;
             }
 
-            .section-title {
+            .hero {
+                height: 50vh;
+            }
+
+            .hero-overlay h1 {
                 font-size: 2rem;
             }
 
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .quick-specs-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
 
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .features-grid {
+            .description-grid {
                 grid-template-columns: 1fr;
             }
 
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
-        }
 
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-
-        .scroll-indicator i {
-            font-size: 2rem;
-            color: var(--gold-color);
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
+            .gallery-item:first-child {
+                grid-column: 1;
+                grid-row: 1;
             }
-            40% {
-                transform: translateY(-20px);
+
+            .specs-detailed {
+                grid-template-columns: 1fr;
             }
-            60% {
-                transform: translateY(-10px);
+
+            .contact-cta h2 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <i class="fas fa-drone"></i>
-                RecDrone
-            </a>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#tour360">Tour 360°</a></li>
-                <li><a href="#galeria">Galería</a></li>
-                <li><a href="#especificaciones">Detalles</a></li>
-                <li><a href="#ubicacion">Ubicación</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1>El Tranque</h1>
-            <p class="hero-subtitle">Experiencia Inmersiva en Vista Aérea Premium</p>
-            <p style="font-size: 1.1rem; margin-bottom: 2.5rem; font-weight: 300;">
-                Descubre este exclusivo terreno a través de nuestra tecnología de drones profesionales y tours 360° interactivos
-            </p>
-            <div class="cta-buttons">
-                <a href="#tour360" class="btn btn-primary">
-                    <i class="fas fa-vr-cardboard"></i> Ver Tour 360°
+    <!-- Header sticky -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="project-title">El Tranque</h1>
+            <div class="header-price">
+                Consultar Precio
+            </div>
+            <div class="cta-header">
+                <a href="#contacto" class="btn btn-primary">
+                    <i class="fas fa-envelope"></i> Consultar
                 </a>
-                <a href="#contacto" class="btn btn-secondary">
-                    <i class="fas fa-envelope"></i> Solicitar Información
+                <a href="https://wa.me/56912345678" class="btn btn-secondary" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
+    </header>
 
-    <!-- Features Section -->
-    <section>
-        <h2 class="section-title">Por Qué Elegirnos</h2>
-        <p class="section-subtitle">Tecnología de vanguardia para mostrar cada detalle de tu inversión</p>
-
-        <div class="features-grid">
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <i class="fas fa-drone"></i>
-                </div>
-                <h3>Fotografía con Drones</h3>
-                <p>Capturamos imágenes aéreas de alta resolución que revelan cada aspecto del terreno desde perspectivas únicas e imposibles.</p>
-            </div>
-
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <i class="fas fa-street-view"></i>
-                </div>
-                <h3>Tours 360° Interactivos</h3>
-                <p>Explora el terreno de manera inmersiva desde cualquier lugar del mundo con nuestra tecnología de realidad virtual.</p>
-            </div>
-
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <i class="fas fa-video"></i>
-                </div>
-                <h3>Videos Cinematográficos</h3>
-                <p>Producción de videos profesionales que muestran la belleza y el potencial del terreno de manera cinematográfica.</p>
-            </div>
-
-            <div class="feature-card fade-in">
-                <div class="feature-icon">
-                    <i class="fas fa-map-marked-alt"></i>
-                </div>
-                <h3>Mapeo Topográfico</h3>
-                <p>Análisis detallado del terreno con mediciones precisas y mapas topográficos generados con tecnología GPS avanzada.</p>
+    <!-- Hero con Tour 360 -->
+    <section class="hero">
+        <iframe 
+            src="https://recdrone.cl/360/ElTranque/" 
+            class="tour-360-frame"
+            allowfullscreen>
+        </iframe>
+        <div class="hero-overlay">
+            <div class="hero-overlay-content">
+                <span class="hero-tag">✨ TERRENO PREMIUM</span>
+                <h1>El Tranque</h1>
+                <p class="hero-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Ubicación Privilegiada - Chile
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Tour 360 Section -->
-    <section id="tour360">
-        <h2 class="section-title">Recorrido Virtual 360°</h2>
-        <p class="section-subtitle">Explora cada rincón del terreno de manera interactiva</p>
+    <!-- Quick Specs Bar -->
+    <div class="quick-specs">
+        <div class="quick-specs-grid">
+            <div class="spec-item">
+                <i class="fas fa-ruler-combined spec-icon"></i>
+                <div class="spec-value">5,000 m²</div>
+                <div class="spec-label">Superficie</div>
+            </div>
+            <div class="spec-item">
+                <i class="fas fa-mountain spec-icon"></i>
+                <div class="spec-value">Semi-Plano</div>
+                <div class="spec-label">Topografía</div>
+            </div>
+            <div class="spec-item">
+                <i class="fas fa-file-contract spec-icon"></i>
+                <div class="spec-value">Al Día</div>
+                <div class="spec-label">Documentación</div>
+            </div>
+            <div class="spec-item">
+                <i class="fas fa-road spec-icon"></i>
+                <div class="spec-value">Pavimentado</div>
+                <div class="spec-label">Acceso</div>
+            </div>
+            <div class="spec-item">
+                <i class="fas fa-bolt spec-icon"></i>
+                <div class="spec-value">Disponible</div>
+                <div class="spec-label">Servicios</div>
+            </div>
+        </div>
+    </div>
 
-        <div class="tour-360-container fade-in">
-            <div class="tour-360-wrapper">
-                <!-- Reemplaza el src con tu URL de tour 360 (ej: Matterport, Kuula, o tu propio sistema) -->
-                <iframe src="https://recdrone.cl/360/ElTranque/" allowfullscreen></iframe>
-                <!-- Si no tienes iframe aún, descomentar el placeholder:
-                <div class="tour-360-placeholder">
-                    <i class="fas fa-360-degrees"></i>
-                    <h3>Tour 360° Disponible Próximamente</h3>
-                    <p>Experimenta el terreno en realidad virtual</p>
+    <!-- Description -->
+    <section class="container">
+        <h2 class="section-title">Sobre Este Terreno</h2>
+        <p class="section-subtitle">Una oportunidad única de inversión</p>
+
+        <div class="description-grid">
+            <div class="description-text">
+                <p>
+                    <strong>El Tranque</strong> es un terreno excepcional que combina ubicación estratégica, 
+                    accesibilidad y un entorno natural privilegiado. Con 5,000 m² de superficie semi-plana, 
+                    este terreno ofrece el espacio perfecto para desarrollar tu proyecto residencial, 
+                    comercial o de inversión.
+                </p>
+                <p>
+                    La propiedad cuenta con toda la documentación al día, acceso por camino pavimentado 
+                    y factibilidad de servicios básicos (agua y electricidad). Su topografía semi-plana 
+                    facilita cualquier tipo de construcción, minimizando costos de movimiento de tierra.
+                </p>
+                <p>
+                    La zona se caracteriza por su tranquilidad, aire puro y vistas panorámicas. 
+                    Ideal para quienes buscan desarrollar un proyecto alejado del ruido urbano, 
+                    pero con fácil acceso a servicios y centros poblados cercanos.
+                </p>
+            </div>
+
+            <div class="highlights-box">
+                <h3>Destacados</h3>
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Documentación legal al día</span>
                 </div>
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Acceso pavimentado</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Factibilidad de servicios</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Topografía semi-plana</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Entorno natural privilegiado</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Vista 360° con drone</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Excelente inversión</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section style="background: var(--light);">
+        <div class="container">
+            <h2 class="section-title">Galería Aérea</h2>
+            <p class="section-subtitle">Imágenes capturadas con drone profesional</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-image"></i>
+                        <h3>Vista Panorámica Principal</h3>
+                        <p>Perspectiva aérea completa del terreno</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <p>Vista Frontal</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <p>Acceso</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <p>Linderos</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <p>Entorno</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Specs -->
+    <section class="container">
+        <h2 class="section-title">Especificaciones Técnicas</h2>
+        <p class="section-subtitle">Información detallada de la propiedad</p>
+
+        <div class="specs-detailed">
+            <div>
+                <div class="spec-row">
+                    <span class="spec-name">Superficie Total</span>
+                    <span class="spec-value-detail">5,000 m²</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-name">Frente</span>
+                    <span class="spec-value-detail">50 metros</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-name">Fondo</span>
+                    <span class="spec-value-detail">100 metros</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-name">Topografía</span>
+                    <span class="spec-value-detail">Semi-plana</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-name">Orientación</span>
+                    <span class="spec-value-detail">Norte</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="spec-row">
+                    <span class="spec-name">Agua</span>
+                    <span class="spec-value-detail">✓ Factibilidad</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-name">Electricidad</span>
+                    <span class="spec-value-detail">✓ Factibilidad</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-name">Acceso</span>
+                    <span class="spec-value-detail">Camino pavimentado</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-name">Documentación</span>
+                    <span class="spec-value-detail">✓ Al día</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-name">Uso de Suelo</span>
+                    <span class="spec-value-detail">Residencial/Comercial</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title">Ubicación</h2>
+            <p class="section-subtitle">Encuentra El Tranque en el mapa</p>
+
+            <div class="map-wrapper">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>El Tranque, Chile</h3>
+                    <p style="color: #999; margin-top: 0.5rem;">
+                        Ubicación exacta revelada al contactar<br>
+                        <small>Coordenadas disponibles para compradores interesados</small>
+                    </p>
+                </div>
+                <!-- Para agregar Google Maps, reemplaza el div anterior con:
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=TU_CODIGO" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
                 -->
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="galeria">
-        <h2 class="section-title">Galería Aérea</h2>
-        <p class="section-subtitle">Imágenes capturadas con tecnología drone profesional</p>
+    <!-- Contact CTA -->
+    <section class="contact-cta" id="contacto">
+        <div class="container">
+            <h2>¿Interesado en El Tranque?</h2>
+            <p>Agenda una visita o solicita más información sobre este terreno</p>
 
-        <div class="gallery-grid">
-            <div class="gallery-item fade-in">
-                <div class="gallery-placeholder">
-                    <i class="fas fa-image"></i>
-                    <h3>Vista Panorámica</h3>
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <a href="https://wa.me/56912345678?text=Hola%2C%20estoy%20interesado%20en%20el%20terreno%20El%20Tranque" target="_blank">
+                        +56 9 XXXX XXXX
+                    </a>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                        Respuesta inmediata
+                    </p>
                 </div>
-                <div class="gallery-overlay">
-                    <h3>Vista General del Terreno</h3>
-                    <p>Perspectiva aérea completa</p>
-                </div>
-            </div>
 
-            <div class="gallery-item fade-in">
-                <div class="gallery-placeholder">
-                    <i class="fas fa-image"></i>
-                    <h3>Vista Frontal</h3>
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <a href="mailto:contacto@recdrone.cl">
+                        contacto@recdrone.cl
+                    </a>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                        Envío de información detallada
+                    </p>
                 </div>
-                <div class="gallery-overlay">
-                    <h3>Acceso Principal</h3>
-                    <p>Entrada y caminos de acceso</p>
-                </div>
-            </div>
 
-            <div class="gallery-item fade-in">
-                <div class="gallery-placeholder">
-                    <i class="fas fa-image"></i>
-                    <h3>Vista Lateral</h3>
-                </div>
-                <div class="gallery-overlay">
-                    <h3>Linderos y Límites</h3>
-                    <p>Delimitación del terreno</p>
-                </div>
-            </div>
-
-            <div class="gallery-item fade-in">
-                <div class="gallery-placeholder">
-                    <i class="fas fa-image"></i>
-                    <h3>Atardecer</h3>
-                </div>
-                <div class="gallery-overlay">
-                    <h3>Vista al Atardecer</h3>
-                    <p>Iluminación natural</p>
-                </div>
-            </div>
-
-            <div class="gallery-item fade-in">
-                <div class="gallery-placeholder">
-                    <i class="fas fa-image"></i>
-                    <h3>Entorno</h3>
-                </div>
-                <div class="gallery-overlay">
-                    <h3>Zona Circundante</h3>
-                    <p>Contexto y ubicación</p>
-                </div>
-            </div>
-
-            <div class="gallery-item fade-in">
-                <div class="gallery-placeholder">
-                    <i class="fas fa-image"></i>
-                    <h3>Vista Detalle</h3>
-                </div>
-                <div class="gallery-overlay">
-                    <h3>Características Especiales</h3>
-                    <p>Detalles destacados</p>
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Teléfono</h3>
+                    <a href="tel:+56912345678">
+                        +56 9 XXXX XXXX
+                    </a>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                        Lun - Vie: 9:00 - 18:00
+                    </p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Specifications Section -->
-    <section id="especificaciones">
-        <h2 class="section-title">Especificaciones del Terreno</h2>
-        <p class="section-subtitle">Información detallada y características principales</p>
-
-        <div class="specs-container fade-in">
-            <div class="spec-item">
-                <div class="spec-icon">
-                    <i class="fas fa-ruler-combined"></i>
-                </div>
-                <div class="spec-content">
-                    <h4>Superficie Total</h4>
-                    <p>5,000 m²</p>
-                </div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-icon">
-                    <i class="fas fa-tape"></i>
-                </div>
-                <div class="spec-content">
-                    <h4>Frente</h4>
-                    <p>50 metros</p>
-                </div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-icon">
-                    <i class="fas fa-mountain"></i>
-                </div>
-                <div class="spec-content">
-                    <h4>Topografía</h4>
-                    <p>Semi-plana</p>
-                </div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-icon">
-                    <i class="fas fa-file-contract"></i>
-                </div>
-                <div class="spec-content">
-                    <h4>Documentación</h4>
-                    <p>Al día</p>
-                </div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-icon">
-                    <i class="fas fa-water"></i>
-                </div>
-                <div class="spec-content">
-                    <h4>Agua</h4>
-                    <p>Factibilidad</p>
-                </div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <div class="spec-content">
-                    <h4>Electricidad</h4>
-                    <p>Factibilidad</p>
-                </div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-icon">
-                    <i class="fas fa-road"></i>
-                </div>
-                <div class="spec-content">
-                    <h4>Acceso</h4>
-                    <p>Camino pavimentado</p>
-                </div>
-            </div>
-
-            <div class="spec-item">
-                <div class="spec-icon">
-                    <i class="fas fa-tree"></i>
-                </div>
-                <div class="spec-content">
-                    <h4>Vegetación</h4>
-                    <p>Natural</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Location Section -->
-    <section id="ubicacion">
-        <h2 class="section-title">Ubicación Estratégica</h2>
-        <p class="section-subtitle">Encuentra el terreno en el mapa</p>
-
-        <div class="map-container fade-in">
-            <!-- Reemplaza con tu código de Google Maps, OpenStreetMap, etc. -->
-            <!-- Ejemplo con Google Maps iframe:
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE" 
-                width="100%" 
-                height="100%" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy">
-            </iframe>
-            -->
-            <div class="map-placeholder">
-                <i class="fas fa-map-marker-alt"></i>
-                <h3>El Tranque, Chile</h3>
-                <p>Ubicación exacta disponible al contactar</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <div class="contact-section fade-in" id="contacto">
-        <div class="contact-grid">
-            <div class="contact-info">
-                <h2>¿Interesado en Este Terreno?</h2>
-                <p>
-                    Nuestro equipo está listo para proporcionarte toda la información que necesitas. 
-                    Agenda una visita guiada o solicita más detalles sobre este exclusivo terreno.
-                </p>
-
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+56 9 XXXX XXXX</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>contacto@recdrone.cl</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Chile</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-clock"></i>
-                        <span>Lun - Vie: 9:00 - 18:00</span>
-                    </div>
-                </div>
-            </div>
-
-            <form class="contact-form" id="contactForm">
-                <h3>Envíanos un Mensaje</h3>
-
-                <div class="form-group">
-                    <label for="name">Nombre Completo *</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Teléfono</label>
-                    <input type="tel" id="phone" name="phone">
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Mensaje *</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Enviar Mensaje
-                </button>
-            </form>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
-            <p style="font-size: 0.9rem; color: #999;">
-                &copy; 2025 RecDrone. Todos los derechos reservados.
-            </p>
-            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">
-                Fotografía y videos aéreos profesionales para propiedades inmobiliarias
+        <div class="container">
+            <p>&copy; 2025 El Tranque - Todos los derechos reservados</p>
+            <p class="footer-note">
+                Imágenes y tour 360° capturados con drone profesional por RecDrone
             </p>
         </div>
     </footer>
 
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/56912345678?text=Hola%2C%20estoy%20interesado%20en%20el%20terreno%20El%20Tranque" 
+       class="whatsapp-float" 
+       target="_blank"
+       title="Consultar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-        // Smooth scrolling for navigation links
+    <script>
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(element => {
-            observer.observe(element);
+        // Header shadow on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 30px rgba(0,0,0,0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
         });
 
-        // Contact form handling
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Aquí puedes agregar tu lógica para enviar el formulario
-            // Por ejemplo, usando EmailJS, FormSubmit, o tu propio backend
-
-            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
-            e.target.reset();
-        });
-
-        // Gallery item click (puedes expandir para lightbox)
-        document.querySelectorAll('.gallery-item').forEach(item => {
+        // Gallery click tracking (puedes expandir para lightbox)
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
             item.addEventListener('click', () => {
-                // Aquí puedes agregar funcionalidad de lightbox/modal
-                console.log('Gallery item clicked');
+                console.log(`Foto ${index + 1} clickeada`);
+                // Aquí puedes agregar un lightbox si quieres
             });
         });
     </script>
